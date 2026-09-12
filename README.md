@@ -1,222 +1,405 @@
-NourishAI Pakistan
+<div align="center">
 
-AI-powered personalized meal planning for Pakistani users, built with Streamlit and Groq.
+# 🥗 NourishAI Pakistan
 
-NourishAI Pakistan is a hackathon-focused nutrition planning application that turns a user's goals, dietary preferences, allergies, health considerations, cuisine preferences, and budget into a practical personalized meal plan.
+### AI-Powered Personalized Nutrition & Meal Planning
 
-The current application extends the original MVP with account authentication, saved-plan history, professional document export, fitness/gym context, and a broader universal planning model while retaining the original Pakistan-first product direction.
+**A universal nutrition studio with a Pakistan-first origin — personalized around your goals, food culture, dietary requirements, allergies, fitness context, health considerations, and budget.**
 
-Product
+<p>
+  <img src="https://img.shields.io/badge/Platform-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Streamlit">
+  <img src="https://img.shields.io/badge/Python-3.13+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/AI-Groq-111827?style=for-the-badge" alt="Groq">
+  <img src="https://img.shields.io/badge/Status-Hackathon%20MVP-0F766E?style=for-the-badge" alt="Hackathon MVP">
+</p>
 
-Core experience
+<p>
+  <a href="#-features">Features</a> •
+  <a href="#-product-flow">Product Flow</a> •
+  <a href="#-technology">Technology</a> •
+  <a href="#-local-setup">Setup</a> •
+  <a href="#-project-structure">Structure</a> •
+  <a href="#-safety">Safety</a>
+</p>
 
-Create an account or sign in.
+</div>
 
-Enter personal context and planning preferences.
+---
 
-Select goals, dietary requirements, allergies, health considerations, cuisines, fitness context, and budget.
+## 🎯 What is NourishAI?
 
-Generate an AI-personalized meal plan.
+**NourishAI Pakistan** is a Streamlit-based AI nutrition planning application designed to turn a user's personal context into a practical meal plan.
 
-Save the plan to personal history.
+The original product was designed around the Pakistani market and a 7-day personalized meal-planning experience. The current implementation extends that foundation with:
 
-Download the plan as a professional Word document.
+- User accounts
+- Saved-plan history
+- Professional Word document export
+- Fitness and gym context
+- Broader global food and dietary context
+- Multiple planning periods
+- Multiple currencies and budgets
 
-Revisit or delete saved plans from the user's own history.
+The goal is simple:
 
-Key capabilities
+> **Collect the right context → understand the constraints → personalize the plan → generate practical meals → let the user save and revisit the result.**
 
-Personalized meal planning
+---
 
-Pakistan-friendly food recommendations
+## ✨ Core Features
 
-Goal-aware planning: lose, maintain, gain, muscle building, strength/performance, and healthier eating
+### 🧠 AI-Personalized Planning
+Generate meal plans from:
 
-Dietary-requirement handling
+- Personal profile
+- Primary goal
+- Current and target weight
+- Activity level
+- Fitness / gym context
+- Dietary requirements
+- Food allergies
+- Health considerations
+- Faith / food-practice preferences
+- Preferred cuisines
+- Foods the user likes / avoids
+- Budget and planning cadence
+- Meal variety preferences
 
-Strict allergy exclusions
+### 🌍 Global Food Context
+The application supports country/region-aware planning, cuisine regions, country-inspired cuisines, currencies, and different dietary or food-practice preferences.
 
-Health-consideration-aware recommendations
+### 🛡️ Constraint-First Nutrition
+Declared allergies are treated as **strict exclusions**. Dietary requirements and health considerations are carried through the AI generation workflow.
 
-Cuisine and food-culture preferences
+### 🏋️ Fitness-Aware Planning
+The planner can account for goals and contexts such as:
 
-Budget-aware planning
+- Weight loss
+- Weight gain
+- Weight maintenance
+- Muscle building
+- Strength / performance
+- Endurance
+- Body recomposition
+- General healthy eating
+- Activity level
+- Training type
+- Workout timing
 
-Fitness and gym context
+### 👤 Accounts & Personal History
+Users can:
 
-Recipe search resources
+- Register
+- Sign in
+- Sign out
+- Reset / change passwords
+- Save plans
+- Reopen previous plans
+- Delete saved plans
 
-User accounts and sign-in/sign-out
+Each user's saved history is separated by account.
 
-Password reset/change flows
+### 📄 Professional Plan Export
+Generated plans can be exported as a professional `.docx` document for offline use and sharing.
 
-Per-user saved-plan history
+### 🍽️ Practical Recipe Resources
+Meals can include recipe search resources. The application avoids inventing unverified recipe/video URLs.
 
-Professional .docx export
+---
 
-Responsive Streamlit interface
+## 🧭 Product Flow
 
-Groq-powered structured AI generation
+```text
+┌──────────────────────┐
+│  Create account /    │
+│      Sign in         │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│   Personal context   │
+│ Goal • Profile       │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Food & culture       │
+│ Diet • Allergies     │
+│ Cuisine • Preferences│
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Health & fitness     │
+│ Activity • Training  │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Budget & planning    │
+│ Cadence • Variety    │
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│     Groq AI          │
+│ Constraint-aware     │
+│ structured generation│
+└──────────┬───────────┘
+           ↓
+┌──────────────────────┐
+│ Personalized plan   │
+│ Meals • Recipes      │
+└───────┬────────┬─────┘
+        ↓        ↓
+   Save history  Download
+                  DOCX
+```
 
-Technology
+---
 
-Frontend: Streamlit
+## 📅 Planning Periods
 
-Language: Python
+NourishAI supports different generation scopes instead of assuming every user wants a weekly plan:
 
-AI: Groq API using the OpenAI-compatible endpoint
+| Planning scope | Intended output |
+|---|---|
+| **Per meal** | One personalized meal |
+| **Per day** | One personalized day |
+| **Per week** | Seven-day plan |
+| **Per month** | Four-week / 28-day planning cycle |
 
-Default model: openai/gpt-oss-20b
+Budget cadence is handled separately so planning duration and budget duration are not confused.
 
-Persistence: SQLite for the hackathon MVP
+---
 
-Document export: python-docx
+## 💡 Original PRD vs Current Product
 
-Version control: Git / GitHub
+The original PRD defined a **Pakistan-focused Streamlit MVP** centered on collecting profile, goals, dietary constraints, allergies, health considerations, cuisines, and PKR budget, then generating a personalized 7-day meal plan with recipe resources.
 
-Repository
+The current implementation extends that MVP with product features that were **not part of the original PRD**, including:
 
-Recommended GitHub repository:
+- Authentication
+- Saved plan history
+- Word export
+- Fitness / gym context
+- Global country and currency support
+- Broader dietary and food-practice options
+- Multiple planning periods
 
-nourishai-pakistan
+This distinction is intentional so the project documentation remains accurate.
 
-Project structure
+---
 
+## 🛠️ Technology
+
+| Layer | Technology |
+|---|---|
+| Frontend | Streamlit |
+| Language | Python |
+| AI | Groq API |
+| AI Integration | OpenAI-compatible API endpoint |
+| Default AI Model | `openai/gpt-oss-20b` |
+| Persistence | SQLite |
+| Document Export | `python-docx` |
+| Configuration | `.env` |
+| Version Control | Git / GitHub |
+
+---
+
+## 📁 Project Structure
+
+```text
 nourishai-pakistan/
+│
 ├── app/
 │   ├── main.py
 │   ├── catalog.py
 │   └── storage.py
+│
 ├── data/
-│   └── nourishai.db          # generated locally; do not commit
+│   └── nourishai.db          # generated locally; do NOT commit
+│
 ├── docs/
+│   ├── PRD-reference.md
+│   └── ...
+│
 ├── .streamlit/
-├── .env                      # local only; do not commit
+│
+├── .env                      # local secrets; do NOT commit
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
 └── README.md
+```
 
-Local setup
+---
 
-1. Create a virtual environment
+## 🚀 Local Setup
 
-Windows:
+### 1. Clone the repository
 
+```bash
+git clone https://github.com/Calipha-Rayyan/NourishAI-Pakistan.git
+cd NourishAI-Pakistan
+```
+
+### 2. Create a virtual environment
+
+**Windows**
+
+```bash
 python -m venv .venv
 .venv\Scripts\activate
+```
 
-macOS/Linux:
+**macOS / Linux**
 
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
+```
 
-2. Install dependencies
+### 3. Install dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
-3. Configure environment variables
+### 4. Configure environment variables
 
-Create .env in the project root:
+Create a `.env` file in the project root:
 
+```env
 GROQ_API_KEY=your_groq_api_key_here
 GROQ_MODEL=openai/gpt-oss-20b
+```
 
-Never commit .env or any API key to GitHub.
+> **Never commit `.env` or expose your API key in the repository.**
 
-4. Run the application
+### 5. Run the application
 
+```bash
 streamlit run app/main.py
+```
 
 Open:
 
+```text
 http://localhost:8501
+```
 
-Git workflow
+---
 
-The project uses two primary branches:
+## 🌿 Git Branch Strategy
 
-main  -> stable / submission-ready
-dev   -> active development
+The repository uses:
+
+```text
+main  → stable / submission-ready
+dev   → active development
+```
 
 Recommended workflow:
 
+```bash
 git checkout dev
-# make changes
 git add .
 git commit -m "feat: describe the change"
 git push origin dev
+```
 
-After testing:
+After testing and approval:
 
+```bash
 git checkout main
 git merge dev
 git push origin main
+```
 
-Safety and responsible-use boundaries
+---
 
-NourishAI is a general wellness and meal-planning application. It is not a medical diagnostic or treatment system.
+## 🔐 Safety & Responsible Use
 
-The application must not:
+NourishAI is a **general wellness and meal-planning application**. It is not a medical diagnosis or treatment system.
 
-Diagnose medical conditions
+The application should **not**:
 
-Prescribe medication
+- Diagnose medical conditions
+- Prescribe medication
+- Claim to treat or cure disease
+- Guarantee health outcomes
+- Replace a qualified doctor or dietitian
+- Recommend a declared allergen
+- Claim religious certification that cannot be verified
 
-Claim to treat or cure disease
-
-Guarantee health outcomes
-
-Present the plan as a replacement for professional medical or nutritional advice
-
-Recommend a stated allergen
-
-Invent or claim unverified Halal/Kosher certification
-
-Health conditions are used as user-provided dietary considerations with cautious language.
+Health conditions are treated as user-provided dietary considerations with cautious language.
 
 Allergies are treated as strict exclusions.
 
-Important product scope
+Budget recommendations are estimates rather than live market prices.
 
-The original PRD defines a Pakistan-focused Streamlit MVP centered on a personalized 7-day meal plan. The current implementation adds product extensions such as accounts, saved history, document export, and fitness context.
+---
 
-Where the current implementation extends the original PRD, those capabilities should be described as post-MVP extensions, not as claims that they were part of the original PRD.
+## 🏆 Hackathon Deliverables
 
-Hackathon deliverables
+The project is designed to support the required submission package:
 
-The project is designed to support:
+- ✅ Working deployment
+- ✅ Public GitHub repository
+- ✅ Product Requirements Document
+- ✅ Presentation slides
+- ✅ 4–5 minute product demonstration video
 
-Public deployment link
+The main demonstration story is:
 
-Public GitHub repository
-
-PRD / product documentation
-
-Presentation slides
-
-4–5 minute demonstration video
-
-Status
-
-Hackathon MVP — active development on dev
-
-The priority is a reliable end-to-end flow:
-
-Collect
+```text
+Problem
   ↓
-Validate
+User context
   ↓
-Understand
+AI personalization
   ↓
-Personalize
-  ↓
-Generate
-  ↓
-Display
+Working meal plan
   ↓
 Save / Download
+  ↓
+Real-world value
+```
 
-Disclaimer
+---
 
-This application is for general informational and meal-planning purposes only. It is not a substitute for professional medical or nutritional advice. Users with medical conditions should consult a qualified healthcare professional before making significant dietary changes.
+## 📌 Current Status
+
+**Hackathon MVP — Active Development**
+
+Current focus:
+
+1. Reliable AI generation
+2. Strong constraint handling
+3. Professional responsive UX
+4. Account and history reliability
+5. Save / download workflow
+6. Stable deployment
+7. Submission readiness
+
+---
+
+## 📄 Documentation
+
+- [Product Requirements Reference](PRD-reference.md)
+- [Application source](app/)
+- [Project dependencies](requirements.txt)
+
+---
+
+## ⚠️ Disclaimer
+
+NourishAI is provided for general informational and meal-planning purposes only. It is not a substitute for professional medical or nutritional advice. Users with medical conditions should consult a qualified healthcare professional before making significant dietary changes.
+
+---
+
+<div align="center">
+
+### 🥗 NourishAI Pakistan
+
+**Personalized planning. Practical food. Smarter choices.**
+
+Built for the hackathon • Streamlit • Python • Groq
+
+</div>
