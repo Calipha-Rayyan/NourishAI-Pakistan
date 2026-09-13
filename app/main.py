@@ -1,3 +1,4 @@
+
 from __future__ import annotations
 
 import html
@@ -762,6 +763,8 @@ st.markdown(
     .auth-nav-item { flex:1;padding:.6rem .45rem;text-align:center;border-radius:11px;color:var(--muted);font-size:.8rem;font-weight:700;cursor:pointer; }
     .auth-nav-item.active { color:var(--deep);background:#fff;box-shadow:0 5px 18px rgba(14,143,125,.09); }
     .auth-help { color:var(--muted);font-size:.76rem;line-height:1.5;margin-top:.45rem; }
+    .auth-helper { margin:.1rem 0 1rem; padding:.25rem 0 .25rem .7rem; border-left:2px solid #1aa593; color:#647874; font-size:.8rem; line-height:1.5; background:transparent; }
+    .auth-helper-icon { color:#0f766e; font-weight:800; margin-right:.3rem; }
     .auth-link-row { display:flex;justify-content:space-between;gap:.6rem;align-items:center;margin-top:.65rem; }
     .auth-link { color:var(--teal-2);font-size:.82rem;font-weight:700; }
     .password-rules { display:grid;grid-template-columns:1fr 1fr;gap:.35rem .65rem;padding:.75rem .8rem;margin:.55rem 0 1rem;border-radius:14px;background:#f5faf8;border:1px solid var(--line);font-size:.76rem;color:var(--muted); }
@@ -1515,7 +1518,12 @@ def render_auth() -> None:
                         st.error(str(exc))
 
         else:  # Forgot password
-            st.info("Enter your account email to receive a short-lived reset code. Configure SMTP for real email delivery; otherwise a demo code is shown for the hackathon.")
+            st.markdown(
+            "<div class='auth-helper'><span class='auth-helper-icon'>↗</span> Enter your account email. "
+            "We’ll use a short-lived reset code; with SMTP configured it is emailed to you, otherwise "
+            "a temporary demo code is shown here for testing.</div>",
+            unsafe_allow_html=True,
+        )
             with st.form("forgot_form", clear_on_submit=False):
                 email = st.text_input("Account email", placeholder="you@example.com", key="forgot_email")
                 submitted = st.form_submit_button("Create reset code", type="primary", use_container_width=True)
